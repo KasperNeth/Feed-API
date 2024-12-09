@@ -1,5 +1,9 @@
 const express = require("express");
+const AuthRoutes = require("./routes/auth.routes");
+const PostRoutes = require("./routes/post.routes");
 
+// connects to the db
+require('./db/db.js').connectToMongoDB()
 
 // Create an HTTP server
 const PORT = 3000;
@@ -8,6 +12,11 @@ const PORT = 3000;
 const app = express();
 
 app.use(express.json());
+
+// define routes
+app.use('/auth', AuthRoutes);
+app.use('/posts', PostRoutes)
+
 
 // Define a route handler for the default home page
 app.get("/", (req, res) => {
